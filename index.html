@@ -915,7 +915,7 @@ html[data-theme="dark"] .mobile-nav{background:#111c2e;border-color:#334155}
 
   /* ================= utils ================= */
   function $(s, r) { return (r || document).querySelector(s); }
-  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
   function fmt(n) {
     if (n >= 10000) return (n / 10000).toFixed(1).replace(/\.0$/, '') + '万';
     if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
@@ -1750,7 +1750,7 @@ html[data-theme="dark"] .mobile-nav{background:#111c2e;border-color:#334155}
     overlay('<div class="modal-mask" data-act="close-overlay"><div class="modal" data-stop="1"><div class="modal-head"><div><div class="modal-title">选择使用方式</div><div class="modal-sub">请选择您希望如何使用该知识库</div></div><button class="icon-btn" data-act="close-overlay">' + ic('close', 15) + '</button></div>' + body + '</div></div>');
   }
   function openMcpModal() {
-    var cfg = '{\n  "mcpServers": {\n    "szicpa-kb": {\n      "url": "https://kb.szicpa.org.cn/api/mcp/kb/audit",\n      "headers": { "Authorization": "Bearer <PERSONAL_TOKEN>" }\n    }\n  }\n}';
+    var cfg = '{\n  "mcpServers": {\n    "szicpa-kb": {\n      "url": "https://example.com/api/mcp/kb/audit",\n      "headers": { "Authorization": "Bearer <PERSONAL_TOKEN>" }\n    }\n  }\n}';
     var html = '<div class="modal-mask" data-act="close-overlay"><div class="modal" data-stop="1"><div class="modal-head"><div><div class="modal-title">通过 MCP 使用</div><div class="modal-sub">把知识库挂载为 MCP Server，供其他智能体或应用调用</div></div><button class="icon-btn" data-act="close-overlay">' + ic('close', 15) + '</button></div>' +
       '<div class="modal-body"><div class="code-wrap"><div class="code-bar"><button class="btn btn-plain" data-act="copy-mcp">' + ic('copy', 13) + '复制配置</button></div><pre class="code" style="display:block;padding:14px;white-space:pre-wrap">' + esc(cfg) + '</pre></div>' +
       '<div class="notice" style="margin-top:14px"><span><b>说明：</b>请先在「设置 - 个人密钥」创建密钥，并替换示例中的 PERSONAL_TOKEN。演示版仅展示配置结构。</span></div></div></div></div>';
@@ -1885,7 +1885,7 @@ html[data-theme="dark"] .mobile-nav{background:#111c2e;border-color:#334155}
     if (act === 'use-agent') { closeOverlay(); S.chat = null; go('#/agents/chat'); return; }
     if (act === 'use-mcp') { openMcpModal(); return; }
     if (act === 'use-wb') { toast('演示版：请参考 WorkBuddy 接入指引'); return; }
-    if (act === 'copy-mcp') { copyText('{\n  "mcpServers": {\n    "szicpa-kb": {\n      "url": "https://kb.szicpa.org.cn/api/mcp/kb/audit"\n    }\n  }\n}', 'MCP 配置已复制'); return; }
+    if (act === 'copy-mcp') { copyText('{\n  "mcpServers": {\n    "szicpa-kb": {\n      "url": "https://example.com/api/mcp/kb/audit"\n    }\n  }\n}', 'MCP 配置已复制'); return; }
     if (act === 'toggle-zones') { var m = document.getElementById('nk-zones-more'); if (m) m.classList.toggle('hidden'); return; }
     if (act === 'agent-tab') { S.agentTab = t.getAttribute('data-tab'); render(); return; }
     if (act === 'agent-cat') { S.agentCat = t.getAttribute('data-cat'); render(); return; }
